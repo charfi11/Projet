@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+     {{ parent() }}
+     {{ encore_entry_link_tags('login') }}
+{% endblock %}
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-light">
+  <a class="navbar-brand text-white" href="/" style="font-size: 2.5em">Brea<strong class="text-danger">k</strong>Guys</a>
+  <div class="vl"></div>
+  <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarColor01">
+  <div class="d-flex justify-content-end" style="width: 13%;">
+   {% if app.user %}
+      <img class="imgNav mr-2" src="../img/{{ app.user.avatar }}"/>
+   {% else %}
+    <ul class="navbar-nav mr-2">
+      <li class="nav-item ml-3">
+        <a class="nav-link" href="/login">login</a>
+      </li>
+      <li class="nav-item ml-2">
+        <a class="nav-link" href="/register">register</a>
+      </li>
+      </ul>
+      {% endif %}
+          </div>
+      </div>
+</nav>
+<main>
+{% if app.user %}
+<div class="navModal" id="navModalNone">
+      <ul class="navbar-nav mr-auto">
+      <li class="avatarCamera">
+      <div class="containCam">
+       <img class="imgNavModal" src="../img/{{ app.user.avatar }}"/>
+       <i class="fas fa-camera camera" id="cam"></i>
+       </div>
+      </li>
+      <li class="mt-2">
+      <h5><strong>{{ app.user.username }}</strong></h5>
+      </li>
+      <li>
+      <p>{{ app.user.email }}</p>
+      </li>
+      <li>
+      <a class="btn btn-info nav-link mt-3 btnSpace" href="/myspace" style="width: 60%;">Votre espace</a>
+      </li>
+      <hr>
+      <li>
+      <a class="btn btn-light nav-link text-dark logoutBtn mt-2" href="{{ path('app_logout') }}">Déconnexion</a>
+      </li>
+      {% endif %}
+    </ul>
+</div>
+
+<form method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            Vous êtes connecté: {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+
+    <h1 class="h3 mb-4 font-weight-normal d-flex justify-content-center"><strong>Se connecter</strong></h1>
+    <label for="inputEmail mb-3"><i class="far fa-envelope mr-1"></i><strong>Email</strong></label>
+    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control mb-4 inputlogin" required>
+    <label for="inputPassword"><i class="fas fa-user-lock mr-1"></i><strong>Mot de passe</strong></label>
+    <input type="password" name="password" id="inputPassword" class="form-control mb-4 inputlogin" required>
+
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    >
+        <div class="checkbox mb-3 d-flex justify-content-center">
+            <label>
+                <input type="checkbox" name="_remember_me" class="mb-2 mt-2"><small class="ml-2">Se souvenir de moi</small>
+            </label>
+        </div>
+        <div class="d-flex justify-content-center mt-2">
+    <button class="btn btn-lg btnlog d-flex justify-content-center" type="submit">
+       Se connecter<i class="mt-1 ml-3 fas fa-arrow-right"></i>
+    </button>
+    </div>
+</form>
+</main>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+{{ encore_entry_script_tags('login') }}
+{% endblock %}

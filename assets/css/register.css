@@ -1,0 +1,92 @@
+form {
+    margin: auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 70%;
+    background-color: #B1624EFF;
+    padding: 5%;
+    color: white;
+}
+
+input {
+    height: calc(2em + 0.75rem + 2px)!important;
+    border-left: none!important;
+    border-right: none!important;
+    border-top: none!important;
+    border-radius: 0!important;
+    border-bottom: solid white 2px!important;
+    background-color: transparent!important;
+    margin-bottom: 6%!important;
+    color: white!important;
+}
+
+input:focus {
+    outline: none!important;
+    box-shadow: none!important;
+    border-color: #5CC8D7FF!important;
+    background-color: transparent!important;
+}
+
+input:after {
+    background-color: transparent!important;
+    color: white!important;
+}
+
+.fa-user {
+    display: none;
+}
+
+.btnreg {
+    border-radius: 3em;
+    padding: 3%;
+    width: 32%;
+    background: transparent;
+    border: solid white 2px;
+    color: white;
+    text-transform: none;
+    font-size: 1.1em;
+}
+
+.btnreg:hover {
+    background-color: #5CC8D7FF;
+    color: white;
+}
+
+.btnreg:hover i {
+    display: block;
+    animation-name: fadeInLeft;
+    animation-duration: 300ms;
+}
+
+.btnreg i {
+    display: none;
+    font-size: 1em;
+}
+
+.fa-envelope {
+    font-size: 1.1em;
+    display: none;
+}
+
+.fa-lock {
+    font-size: 1.1em;
+    display: none;
+}
+
+@keyframes fadeInLeft {
+    from {
+      opacity: 0;
+      -webkit-transform: translate3d(-100%, 0, 0);
+      transform: translate3d(-100%, 0, 0);
+    }
+  
+    to {
+      opacity: 1;
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  
+  .fadeInLeft {
+    animation-name: fadeInLeft;
+  }

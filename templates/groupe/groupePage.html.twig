@@ -1,0 +1,175 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+     {{ parent() }}
+     {{ encore_entry_link_tags('groupe') }}
+{% endblock %}
+{% block title %}GroupePage{% endblock %}
+
+{% block body %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-light">
+  <a class="navbar-brand text-white" href="/" style="font-size: 2.5em">Brea<strong class="text-danger">k</strong>Guys</a>
+  <div class="vl"></div>
+  <select name="user" onchange="location = this.value;" 
+  class="selectpicker ml-3" data-live-search="true" title="Rechercher un utilisateur" style="width: 40%;">
+  {% for user in users %}
+  <option data-tokens="{{ user.username }}" value="{{ path('myspaceuser', {'id': user.id}) }}">{{ user.username }}</option>
+  {% endfor %}
+  </select>
+
+  <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarColor01">
+  <div class="d-flex justify-content-end" style="width: 13%;">
+   {% if app.user %}
+   <div class="d-flex navuser">
+      <img class="imgNav mr-2" src="../img/{{ app.user.avatar }}"/>
+      <p class="usernametop ml-1 mr-2"> <strong>{{ app.user.username }}</strong></p>
+   </div>
+   {% else %}
+    <ul class="navbar-nav mr-2">
+      <li class="nav-item ml-3">
+        <a class="nav-link" href="/login">login</a>
+      </li>
+      <li class="nav-item ml-2">
+        <a class="nav-link" href="/register">register</a>
+      </li>
+      </ul>
+      {% endif %}
+          </div>
+      </div>
+</nav>
+<main>
+{% if app.user %}
+<div class="navModal" id="navModalNone">
+      <ul class="navbar-nav mr-auto">
+      <li>
+       <img class="imgNavModal" src="../img/{{ app.user.avatar }}"/>
+      </li>
+      <li class="mt-2">
+      <h5><strong>{{ app.user.username }}</strong></h5>
+      </li>
+      <li>
+      <p>{{ app.user.email }}</p>
+      </li>
+      <li>
+      <a class="btn btn-info nav-link mt-3 btnSpace" href="/myspace" style="width: 60%;">Votre espace</a>
+      </li>
+      <hr>
+      <li>
+      <a class="btn btn-light nav-link text-dark logoutBtn mt-2" href="{{ path('app_logout') }}">Déconnexion</a>
+      </li>
+      {% endif %}
+    </ul>
+</div>
+{% if yourgrp.user == app.user %}
+<div class="back">
+<div class="background"></div>
+</div>
+{% endif %}
+<div class="d-flex justify-content-between">
+<div class="d-flex flex-column title">
+<img src="../img/{{ yourgrp.image }}" alt="imgrp" class="imggrp mt-3">
+<h5 class="grptitle mt-3"><strong>{{ yourgrp.name }}</strong></h5>
+<ul class="mt-3 d-flex flex-column">
+{% if yourgrp.user == app.user %}
+<li class="accessevent mb-3">event</li>
+<hr>
+<li class="mt-1 coggrp">
+<i class="fas fa-cog text-white"></i>
+</li>
+</ul>
+<div class="managegrp">
+<ul class="d-flex flex-column">
+<li class="accesscrud">Modifier le groupe</li>
+<li class="mt-2"><a href="{{ path('deletegrp', {'id': yourgrp.id}) }}">Supprimer le groupe</a>
+</ul>
+</div>
+{% endif %}
+</div>
+<div class="event d-flex flex-column align-items-center" style="width: 70%;">
+{% for ev in yourgrp.event %}
+<div>
+<p>{{ev.name}}</p>
+</div>
+{% endfor %}
+</div>
+<div class="d-flex flex-column usernamepart" style="width: 30%;">
+{% if yourgrp.user == app.user %}
+<div class="d-flex justify-content-center mt-2 addfr">
+<button class="btn d-flex justify-content-center ajoutfriend mt-3" style="width: 90%; height: 3em;">
+<p><strong>Ajouter un ami</strong></p>
+<i class="fas fa-user-friends ajoutfriendi ml-2"></i>
+</button>
+</div>
+{% endif %}
+{% for user in user %}
+{% if app.user is same as(user) %}
+{% else %}
+<img src="../img/{{ user.avatar }}" alt="usergrpimg" class="imggrpuser mt-4">
+<a href="{{ path('myspaceuser', {'id': user.id}) }}" class="text-center mt-2">{{ user.username }}</a>
+<i class="fas fa-user-minus" data-toggle="modal" data-target="#exampleModalCenter"></i>
+{% endif %}
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Souhaitez vous vraiment supprimer {{user.username}} du groupe ?</p>
+        <a href="{{ path('deleteuseringrp', {'id': yourgrp.id, 'userid': user.id}) }}" class="btn btn-primary">Valider</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+</div>
+</div>
+{% for i in yourgrp.invites %}
+{% for iu in i.users %}
+{% if iu is not null %}
+<a href="{{ path('deleteinvitegrp', {'id': yourgrp.id}) }}" class="deleteingrp" id="{{ iu.id }}">{{ iu.username }}</a>
+{% endif %}
+{% endfor %}
+{% endfor %}
+{{ form_start(MemberType, {'attr': {'class': 'formuser'}}) }}
+{{ form_row(MemberType.users, {'attr' : {
+    'class' : 'mb-2 selectpicker',
+    'data-live-search':"true"
+}}) }}
+<button class="btn btn-info">valider</button>
+{{ form_end(MemberType) }}
+
+<div class="eventform">
+{{ form_start(FormEvent, {'attr': {'class': 'formev'}}) }}
+{{ form_row(FormEvent.name) }}
+{{ form_row(FormEvent.date) }}
+{{ form_row(FormEvent.url) }}
+<button class="btn btn-info">valider</button>
+{{ form_end(FormEvent) }}
+</div>
+
+<div class="crud">
+<div class="d-flex flex-column" style="width: 50em;">
+{{ form_start(formGrpe, {'attr': {'class': 'formgrp'}}) }}
+<div class="d-flex justify-content-between">
+    <h2 class="mb-4">Modifier Groupe</h2>
+    <i class="fas fa-times-circle fa-2x closes"></i>
+</div>
+{{ form_row(formGrpe.name) }}
+<button class="btn btn-success">valider</button>
+{{ form_end(formGrpe) }}
+</div>
+</div>
+</main>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('groupe') }}
+{% endblock %}

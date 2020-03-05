@@ -1,0 +1,562 @@
+a {
+    color: white!important;
+}
+
+.navbar-brand {
+    color: white!important;
+}
+
+.bootstrap-select .dropdown-menu li a {
+    color: black!important;
+}
+
+form {
+    background-color: #B1624EFF;
+    padding: 5%;
+    color: white;
+}
+
+form h2 {
+    display: flex;
+    justify-content: center;
+}
+
+form .btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 6%;
+    border-radius: 3em;
+    padding: 3%;
+    width: 32%;
+    background: transparent;
+    border: solid white 2px;
+    color: white;
+    text-transform: none;
+    font-size: 1.1em;
+}
+
+form .btn:hover {
+    background-color: #5CC8D7FF;
+    color: white;
+}
+
+.back1 {
+    background: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+    display: none;
+}
+
+.back2 {
+    background: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+    display: none;
+}
+
+.back3 {
+    background: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+    display: none;
+}
+
+.back4 {
+    background: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+    display: none;
+}
+
+.back5 {
+    background: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+    display: none;
+}
+
+.eventFormUser input {
+    height: calc(2em + 0.75rem + 2px)!important;
+    border-left: none!important;
+    border-right: none!important;
+    border-top: none!important;
+    border-radius: 0!important;
+    border-bottom: solid white 2px!important;
+    background-color: transparent!important;
+    margin-bottom: 6%!important;
+    color: white!important;
+}
+
+.eventFormUser input:focus {
+    outline: none!important;
+    box-shadow: none!important;
+    border-color: #5CC8D7FF!important;
+    background-color: transparent!important;
+}
+
+.eventFormUser input:after {
+    background-color: transparent!important;
+    color: white!important;
+}
+
+.editFormUser input {
+    height: calc(2em + 0.75rem + 2px)!important;
+    border-left: none!important;
+    border-right: none!important;
+    border-top: none!important;
+    border-radius: 0!important;
+    border-bottom: solid white 2px!important;
+    background-color: transparent!important;
+    margin-bottom: 6%!important;
+    color: white!important;
+}
+
+.editFormUser input:focus {
+    outline: none!important;
+    box-shadow: none!important;
+    border-color: #5CC8D7FF!important;
+    background-color: transparent!important;
+}
+
+.editFormUser input:after {
+    background-color: transparent!important;
+    color: white!important;
+}
+
+.editFormGrp input {
+    height: calc(2em + 0.75rem + 2px)!important;
+    border-left: none!important;
+    border-right: none!important;
+    border-top: none!important;
+    border-radius: 0!important;
+    border-bottom: solid white 2px!important;
+    background-color: transparent!important;
+    margin-bottom: 6%!important;
+    color: white!important;
+}
+
+.editFormGrp input:focus {
+    outline: none!important;
+    box-shadow: none!important;
+    border-color: #5CC8D7FF!important;
+    background-color: transparent!important;
+}
+
+.editFormGrp input:after {
+    background-color: transparent!important;
+    color: white!important;
+}
+
+.verticalNavSpace {
+   cursor: pointer;
+   box-shadow: -1px 1px 6px 1px rgba(0, 0, 0, 0.2); 
+   background-color: #191970;
+   width: 5%;
+   text-align: center;
+   height: auto;
+   border-top-right-radius: 0.8em;
+   border-bottom-right-radius: 0.8em;
+   margin-top: 40vh;
+   transform: translateY(-50%);
+   transition: 200ms;
+   height: 12em;
+   z-index: 999;
+}
+
+.verticalNavSpace:hover {
+   opacity: 0.9;
+   transition: 200ms;
+}
+
+.verticalNavSpace ul li {
+    list-style-type: none;
+    padding: 3%;
+}
+
+.verticalNavSpace ul li i {
+    cursor: pointer;
+    color: white;
+    font-size: 1.3em;
+    text-shadow: 2px 2px rgba(0, 0, 0, 0.4);
+    margin-top: 60%;
+}
+
+.listVerticalNav {
+    margin: auto;
+}
+
+.verticalNavSpace ul li i:hover {
+    transition: 100ms;
+    transform: scale(1.1);
+}
+
+.grpBlock {
+    width: 100%;
+    height: auto;
+    margin: auto;
+}
+
+.grpBlock .col-md-4 {
+    max-width: 22%;
+}
+
+.grpBlockNone {
+    width: 60%;
+}
+
+.grpName {
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    width: 80%;
+    padding: 8%;
+    background-color: rgba(0, 0, 0, 0.9);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: 400ms;
+}
+
+.grpUserTitle {
+    border-bottom: 3px solid black;
+    padding-bottom: 2%;
+}
+
+
+.grpSpace {
+    position: relative;
+    padding: 0!important;
+    text-align: center;
+    color: white;
+    transition: 400ms;
+    overflow: hidden;
+}
+
+
+.imgGrp {
+    box-shadow: -1px 2px 10px 3px rgba(0, 0, 0, 0.9) inset;
+}
+
+.grpSpace:hover .imgGrp {
+    transition: 400ms;
+    box-shadow: -1px 2px 3px 3px rgba(0, 0, 0, 0.9) inset;
+    transform: scale(1.4);
+}
+
+.grpSpace:hover .grpName {
+    transition: 400ms;
+    width: 95%;
+    padding: 15%;
+    letter-spacing: 4px;
+}
+
+.editFormGrp {
+    display: none;
+}
+
+.editBoard {
+    display: none;
+    position: absolute;
+    top: 60%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: auto;
+    margin: 0!important;
+    box-shadow: -1px 1px 6px 1px rgba(0, 0, 0, 0.2); 
+    padding: 1%;
+    z-index: 99;
+}
+
+.editFormGrp form {
+    position: absolute;
+    top: 60%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: auto;
+    margin: 0!important;
+    z-index: 999;
+    box-shadow: -1px 1px 6px 1px rgba(0, 0, 0, 0.2); 
+}
+
+.editFormGrp .alert {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: auto;
+    margin: 0!important;
+    z-index: 999;
+    box-shadow: -1px 1px 6px 1px rgba(0, 0, 0, 0.2); 
+}
+
+.editFormUser {
+    display: none;
+}
+
+.editFormUser form {
+    position: absolute;
+    top: 60%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: auto;
+    margin: 0!important;
+    box-shadow: -1px 1px 6px 1px rgba(0, 0, 0, 0.2); 
+    z-index: 991;
+}
+
+.imgProfil {
+    height: 65px;
+    width: 65px;
+    border-radius: 50%;
+}
+
+.containTitleUser {
+    padding: 3%;
+    background: linear-gradient(140deg, #424242 40%,#383838 60%);
+}
+
+.inviteblock {
+    background: white;
+    display: none;
+    width: 30%;
+    position: absolute;
+    top: 34%; left: 79%;
+    transform: translate(-50%, -50%);
+    height: auto;
+    margin: 0!important;
+    box-shadow: -1px 1px 6px 1px rgba(0, 0, 0, 0.1); 
+    z-index: 99999999;
+}
+
+.inviteform {
+    border-bottom: solid 1px lightgray;
+}
+
+.countinv {
+    border-radius: 50%;
+    height: 19px;
+    width: 19px;
+    position: absolute;
+    top: 21.5%; left: 97.5%;
+    transform: translate(-50%, -50%);
+    margin: 0!important;
+    text-align: center;
+}
+
+.eventFormUser {
+    position: absolute;
+    top: 60%; left: 50%;
+    transform: translate(-50%, -40%);
+    width: 60%;
+    height: auto;
+    margin: 0!important;
+    z-index: 999;
+    box-shadow: -1px 1px 6px 1px rgba(0, 0, 0, 0.2); 
+}
+
+.eventFormUser {
+    display: none;
+}
+
+.modalPlus {
+    cursor: pointer;
+    width: 16%;
+    text-align: center;
+    position: absolute;
+    top: 97%; left: 4%;
+    z-index: 999;
+}
+
+.modalPlus {
+    display: none;
+}
+
+.modalPlus ul {
+    box-shadow: -1px 1px 6px 1px rgba(0, 0, 0, 0.2); 
+    background: white;
+    border-radius: 1rem;
+    padding: 3%;
+}
+
+li:hover {
+    transition: 100ms;
+    color: grey;
+}
+
+.events {
+    border-left: solid black;
+    margin-top: 35vh;
+    transform: translateY(-50%);
+    padding: 1%;
+    height: 20em;
+}
+
+.eventtitle {
+    margin-right: 5rem !important;
+    color: grey;
+}
+
+.trophy {
+    color: #FFD700;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+}
+
+#userevent_trophee {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#userevent_trophee .form-check {
+    margin-left: 3%;
+}
+
+.eventblock {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+
+.bouclevent {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.evUserTitle {
+    text-align: center;
+}
+
+.evUserTitle i {
+    margin-bottom: auto;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.card-link:hover {
+    cursor: pointer;
+    text-decoration: underline#29ABE0;
+}
+
+form.follow {
+    background: none;
+}
+
+.followers {
+    background-color: #F8F5F0;
+}
+
+.cardfriend a:hover {
+    text-decoration: none;
+}
+
+.cardfriend img {
+    border-radius: 1.1em;
+}
+
+.cardfriend:hover img {
+    transition: 100ms;
+    opacity: 0.9;
+}
+
+#unfollow.btn {
+    text-transform: none!important;
+    animation-name: pulse;
+    animation-duration: 400ms;
+}
+
+.followBtn.btn {
+    text-transform: none!important;
+    animation-name: pulse;
+    animation-duration: 400ms;
+}
+
+.fa-envelope {
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 1.2em;
+}
+
+.formimgupdate {
+    display: none;
+    position: absolute;
+    top: 50%; left: 44%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: auto;
+    margin: 0!important;
+    z-index: 99;
+}
+
+form .formimgupdate {
+    box-shadow: -1px 1px 6px 1px rgba(0, 0, 0, 0.2); 
+    padding: 1%;
+}
+
+.avatarCamera {
+    position: relative;
+    transition: 200ms;
+}
+
+.avatarCamera:hover {
+    cursor: pointer;
+    transition: 200ms;
+}
+
+.avatarCamera:hover #cam {
+    display: block;
+}
+
+.avatarCamera:hover img.imgProfil {
+    opacity: 0.7;
+}
+
+.containCam {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#cam {
+    display: none;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 1em;
+    padding: 15%;
+}
+
+.camera {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 1.5em;
+    z-index: 2;
+}

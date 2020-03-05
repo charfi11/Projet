@@ -1,0 +1,397 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+     {{ parent() }}
+     {{ encore_entry_link_tags('myspace') }}
+{% endblock %}
+{% block title %}Myspace{% endblock %}
+
+{% block body %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-light">
+  <a class="navbar-brand text-white" href="/" style="font-size: 2.5em">Brea<strong class="text-danger">k</strong>Guys</a>
+  <div class="vl"></div>
+  <select name="user" onchange="location = this.value;" 
+  class="selectpicker ml-3" data-live-search="true" title="Rechercher un utilisateur" style="width: 40%;">
+  {% for user in users %}
+  <option data-tokens="{{ user.username }}" value="{{ path('myspaceuser', {'id': user.id}) }}">{{ user.username }}</option>
+  {% endfor %}
+  </select>
+
+  <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarColor01">
+  <div class="d-flex justify-content-end" style="width: 13%;">
+   {% if app.user %}
+   <div class="d-flex navuser">
+      <img class="imgNav mr-2" src="../img/{{ app.user.avatar }}"/>
+      <p class="usernametop ml-1 mr-2"> <strong>{{ app.user.username }}</strong></p>
+   </div>
+   {% else %}
+    <ul class="navbar-nav mr-2">
+      <li class="nav-item ml-3">
+        <a class="nav-link" href="/login">login</a>
+      </li>
+      <li class="nav-item ml-2">
+        <a class="nav-link" href="/register">register</a>
+      </li>
+      </ul>
+      {% endif %}
+          </div>
+      </div>
+</nav>
+
+<main>
+{% if app.user %}
+<div class="navModal" id="navModalNone">
+      <ul class="navbar-nav mr-auto">
+      <li>
+       <img class="imgNavModal" src="../img/{{ app.user.avatar }}"/>
+      </li>
+      <li class="mt-2">
+      <h5><strong>{{ app.user.username }}</strong></h5>
+      </li>
+      <li>
+      <p>{{ app.user.email }}</p>
+      </li>
+      <li>
+      <a class="btn btn-info nav-link mt-3 btnSpace" href="/myspace" style="width: 60%;">Votre espace</a>
+      </li>
+      <hr>
+      <li>
+      <a class="btn btn-light nav-link text-dark logoutBtn mt-2" href="{{ path('app_logout') }}">Déconnexion</a>
+      </li>
+      {% endif %}
+    </ul>
+</div>
+
+{% if app.user is same as(user) %}
+<div class="inviteblock">
+{% for form in forms %}
+{{ form_start(form, {'attr' : {'class' : 'inviteform'}}) }}
+<div class="d-flex justify-content-center">
+<h5>nom</h5>
+</div>
+{{ form_row(form.user, {'id' : form.children.user.vars.id ~ form.vars.name}) }}
+{{ form_row(form.groupe, {'id' : form.children.groupe.vars.id ~ form.vars.name}) }}
+{{ form_row(form.children._token, {'id' : form.children._token.vars.id ~ form.vars.name}) }}
+<div class="d-flex">
+<button class="btn btn-dark">Accepter</button>
+<a href="{{ path('deleteinvite', { 'id': form.vars.name }) }}" class="btn btn-secondary ml-3 deletein">Refuser</a>
+</div>
+{{ form_end(form) }}
+{% endfor %}
+</div>
+{% endif %}
+
+<div class="d-flex mt-4 containTitleUser" style="width: 100%">
+<div class="d-flex justify-content-between" style="width: 100%">
+<div class="d-flex">
+<h1 class="mt-3 ml-3 mr-3 text-light text-capitalize"><strong>{{ user.username }}</strong></h1>
+<div class="avatarCamera">
+<img src="/img/{{ user.avatar }}" alt="imgprofil" class="imgProfil containcam">
+<i class="fas fa-camera camera" id="cam"></i>
+</div>
+</div>
+<div class="d-flex">
+{% set foo = user %}
+{% if foo in app.user.friends %}
+{% endif %}
+{% if app.user is same as(user) %}
+{% if app.user.invites |length >= 1 %}
+<i class="far fa-envelope-open text-danger inviteselect"></i>
+<span class="countinv bg-danger text-white mt-2 mr-2"><p>{{ app.user.invites|length }}</p></span>
+{% else %}
+<i class="far fa-envelope text-secondary"></i>
+{% endif %}
+{% elseif foo in app.user.friends %}
+<a href="{{ path('unfollow', {'id': user.id}) }}" 
+class="btn btn-success mt-1" id="unfollow"><strong>Suivi</strong><i class="fas fa-check ml-2 mt-1"></i></a>
+{% else %}
+{{ form_start(followForm, {'attr': {'class': 'follow'}}) }}
+{{ form_row(followForm.friends, {'attr' :  {'value' : user.id }}) }}
+{{ form_row(followForm.users, {'attr' :  {'value' : app.user.id }}) }}
+<button class="btn btn-info d-flex followBtn"><i class="fas fa-plus mt-1 mr-2 text-white"></i><strong class="text-white">Suivre</strong></button>
+{{ form_end(followForm) }}
+{% endif %}
+</div>
+</div>
+</div>
+
+<div class="formimgupdate">
+{{form_start(formImgUpdate)}}
+{{form_row(formImgUpdate.avatar)}}
+<button class="btn">Valider</button>
+{{form_end(formImgUpdate)}}
+</div>
+
+<div class="followers d-flex mt-3">
+{% if app.user is same as(user) %}
+{% for friend in app.user.friends %}
+<div class="cardfriend mr-4 ml-2" style="width: 10%">
+<a href="{{ path('myspaceuser', {'id': friend.id}) }}" class="d-flex flex-column align-items-center mb-2 mt-1">
+<h5 class="mb-2 text-secondary"><small>{{ friend.username }}</small></h5>
+<img src="img/{{ friend.avatar }}" alt="friend" style="width: 100%;">
+</a>
+</div>
+{% endfor %}
+{% else %}
+{% for friend in user.friends %}
+<div class="cardfriend mr-4 ml-2" style="width: 10%">
+<a href="{{ path('myspaceuser', {'id': friend.id}) }}" class="d-flex flex-column align-items-center mb-2 mt-1">
+<h5 class="mb-2 text-secondary"><small>{{ friend.username }}</small></h5>
+<img src="/img/{{ friend.avatar }}" alt="friend" style="width: 100%;">
+</a>
+</div>
+{% endfor %}
+{% endif %}
+</div>
+
+<div class="d-flex justify-content-between">
+{% if app.user is same as(user) %}
+<nav class="verticalNavSpace d-flex flex-column">
+<ul class="listVerticalNav mt-1 mb-3 d-flex flex-column align-items-center">
+<li><i class="fas fa-users editGrpBlock"></i></li>
+<li><i class="fas fa-calendar-alt spaceFormevent"></i></li>
+<li><i class="fas fa-users-cog boardgrp"></i></li>
+<li><i class="fas fa-plus-circle spacePlus"></i></li>
+{% endif %}
+</ul>
+</nav>
+<div class="modalPlus">
+<ul class="d-flex flex-column">
+<li class="modifUserform mt-1">Editer le profil</li>
+<li></li>
+</ul>
+</div>
+
+<div class="grpBlockNone">
+<div class="grpBlock row mt-5 mb-4">
+{% if app.user is same as(user) %}
+<h3 class="col-md-12 mb-4 grpUserTitle"><strong>Vos groupes</strong></h3>
+{% else %}
+<h3 class="col-md-12 mb-4 grpUserTitle"><strong>Les groupes de {{ user.username }}</strong></h3>
+{% endif %}
+{% if app.user is same as(user) %}
+{% if app.user.groupe |length >= 1 %}
+{% for grp in app.user.groupe %}
+<div class="grpSpace col-md-3">
+<a href="{{ path('yourGroupe', {'id':grp.id} )}}">
+<img class="imgGrp" src="img/{{ grp.image }}" alt="grpimg" style="width: 100%;">
+<p class="grpName">{{ grp.name }}</p></a>
+</div>
+{% endfor %}
+{% else %}
+<p class="text-secondary mt-2"><small>Vous n'avez pas de groupe</small></p>
+{% endif %}
+{% else %}
+{% for grp in groupe %}
+<div class="grpSpace col-md-3">
+<a href="{{ path('yourGroupe', {'id':grp.id} )}}">
+<img class="imgGrp" src="../img/{{ grp.image }}" alt="grpimg" style="width: 100%;">
+<p class="grpName">{{ grp.name }}</p></a>
+</div>
+{% endfor %}
+{% endif %}
+</div>
+<div class="blockgrpinvite row mt-5 mb-4">
+<h3 class="col-md-12 mb-4 grpUserTitle"><strong>Groupes invités</strong></h3>
+{% if app.user is same as(user) %}
+{% if app.user.grps |length >= 1 %}
+{% for gri in app.user.grps |reverse %}
+<div class="grpSpace col-md-3">
+<a href="{{ path('yourGroupe', {'id':gri.id} )}}">
+<img class="imgGrp" src="../img/{{ gri.image }}" alt="grpimg" style="width: 100%;">
+<p class="grpName">{{ gri.name }}</p></a>
+</div>
+{% endfor %}
+{% else %}
+<p class="text-secondary grpinvite"><small>Vous n'avez pas d'invitation groupe</small></p>
+{% endif %}
+{% endif %}
+</div>
+</div>
+
+<div class="events">
+<p class="eventtitle mb-4"><strong>Derniers événements</strong></p>
+{% if app.user is same as(user) %}
+<div>
+{% if app.user.evuser |length >= 1 %}
+{% for ev in app.user.evuser |slice(0, 5) |reverse %}
+<div class="d-flex">
+<p>{{ ev.name }}</p>
+{% if ev.trophee.id == 1 %}
+<i class="fas fa-trophy ml-2 trophy"></i>
+{% else %}
+{% endif %}
+</div>
+{% endfor %}
+{% else %}
+<p class="text-secondary"><small>Vous n'avez pas d'événéments</small></p>
+{% endif %}
+</div>
+{% else %}
+<div>
+{% for events in userevs %}
+<p>{{ events.name }}</p>
+{% endfor %}
+</div>
+{% endif %}
+</div>
+</div>
+
+<div class="eventblock mt-5 mb-4">
+<div class="d-flex evUserTitle mb-3">
+<h3><strong>Vos évenements</strong></h3>
+{% if app.user is same as(user) %}
+{% if app.user.evuser |length >= 1 %}
+<i class="fas fa-minus-circle text-warning ml-2 mt-1" data-toggle="modal" data-target="#exampleModalCenter"></i>
+{% endif %}
+</div>
+{% if app.user.evuser |length >= 1 %}
+<div class="bouclevent d-flex">
+{% for ev in app.user.evuser |reverse %}
+<div class="card mt-2 mb-2 ml-2" style="width: 12rem;">
+  <div class="card-body">
+  <div class="d-flex mb-2">
+    <h4 class="card-title"><strong>{{ ev.name }}</strong></h4>
+    {% if ev.trophee.id == 1 %}
+    <i class="fas fa-trophy mt-1 ml-2 trophy"></i>
+    {% else %}
+    {% endif %}
+    {% if app.user is same as(user) %}
+    <a href="{{ path('deleteeventuser', {'id':ev.id}) }}"><i class="far fa-calendar-times fa-2x del ml-5 text-danger"></i></a>
+    {% endif %}
+    </div>
+    <h6 class="card-subtitle mb-2 text-muted">{{ ev.date|date("m/d/Y") }}</h6>
+    <p class="card-text">content</p>
+    <p class="card-link text-info">{{ ev.url }}</p>
+  </div>
+</div>
+{% endfor %}
+{% else %}
+<div class="d-flex flex-column align-items-center">
+<i class="fas fa-calendar-times fa-3x mt-4 mb-3 text-secondary"></i>
+<h5 class="text-secondary"><small>Vous n'avez pas d'événements</small></h5>
+</div>
+{% endif %}
+{% else %}
+{% for ev in userevs |reverse %}
+<div class="card mt-2 mb-2 ml-2" style="width: 12rem;">
+  <div class="card-body">
+  <div class="d-flex mb-2">
+    <h4 class="card-title"><strong>{{ ev.name }}</strong></h4>
+    {% if ev.trophee.id == 1 %}
+    <i class="fas fa-trophy mt-1 ml-2 trophy"></i>
+    {% else %}
+    {% endif %}
+    </div>
+    <h6 class="card-subtitle mb-2 text-muted">{{ ev.date|date("m/d/Y") }}</h6>
+    <p class="card-text">content</p>
+    <p class="card-link text-info">{{ ev.url }}</p>
+  </div>
+</div>
+{% endfor %}
+{% endif %}
+</div>
+</div>
+
+{% if app.user is same as(user) %}
+<div class="editBoard bg-white">
+<h2 class="mb-4"><strong>Supprimer vos groupes</strong></h2>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Groupe</th>
+      <th scope="col">Modifier/supprimer</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for grp in app.user.groupe %}
+    <tr class="table-active">
+      <th scope="row">{{ grp.name }}</th>
+      <td><a href="{{ path('deletegrpuser', {'id':grp.id}) }}"><i class="fas fa-trash-alt del text-danger"></i></a></td>
+    </tr>
+  </tbody>
+{% endfor %}
+</table> 
+</div>
+{% if app.user.groupe |length > 5 %}
+<div class="editFormGrp">
+<div class="alert alert-light alert-dismissible fade show" role="alert">
+<div class="d-flex">
+<h5><strong>Attention!</strong></h5>
+<i class="fas fa-exclamation-triangle ml-2 mt-1 text-danger"></i>
+</div>
+  <strong><p>Vous ne pouvez pas créer plus de 5 groupes différents !</p></strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+</div>
+{% else %}
+<div class="back1"></div>
+<div class="editFormGrp">
+{{ form_start(formGroupe) }}
+    <h2 class="mb-4"><strong>Créer un Groupe</strong></h2>
+{{ form_row(formGroupe.name) }}
+{{ form_row(formGroupe.image) }}
+<button class="btn">Valider</button>
+{{ form_end(formGroupe) }}
+</div>
+{% endif %}
+<div class="back2"></div>
+<div class="editFormUser">
+{{ form_start(accountForm) }}
+<h2 class="mb-4"><strong>Modifier le profil</strong></h2>
+{{ form_row(accountForm.username) }}
+{{ form_row(accountForm.email) }}
+{{ form_row(accountForm.password) }}
+<button class="btn">Valider</button>
+{{ form_end(accountForm) }}
+</div>
+<div class="back3"></div>
+<div class="eventFormUser">
+{{form_start(formUserevent) }}
+<h2 class="mb-4"><strong>Ajouter un événement</strong></h2>
+{{ form_row(formUserevent.name) }}
+{{ form_row(formUserevent.lieu) }}
+{{ form_row(formUserevent.date) }}
+{{ form_row(formUserevent.url) }}
+{{ form_row(formUserevent.trophee) }}
+<button class="btn">Valider</button>
+{{ form_end(formUserevent) }}
+</div>
+{% endif %}
+<div class="back4"></div>
+<div class="back5"></div>
+</div>
+</div>
+</main>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Suppression des événéments</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex">
+        <h5><strong>Attention!</strong></h5>
+        <i class="fas fa-exclamation-triangle mt-1 ml-2 text-danger"></i>
+        </div>
+        <p><strong>Vous vous apprêtez à supprimer tous vos événéments !</strong></p>
+        <p><strong>Êtes vous sûr de vouloir continuer ?</strong></p>
+        <a class="btn btn-danger" href="{{ path('deleteallev', {'id': user.id}) }}">Supprimer</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Abandonner</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('myspace') }}
+{% endblock %}

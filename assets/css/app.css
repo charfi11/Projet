@@ -1,0 +1,306 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100%;
+    font-family: 'Montserrat', sans-serif;
+    background: whitesmoke!important;
+}
+
+main {
+    min-height: calc(100vh - 21px);
+    padding-top: 85px;
+}
+
+ul li {
+    display: inline;
+}
+
+li {
+    list-style-type: none;
+}
+
+.usernametop {
+    margin-top: auto;
+    margin-bottom: auto;
+    text-transform: capitalize;
+}
+
+.vl {
+    border-left: 2px solid #d9534f;
+    height: 4em;
+}
+
+.bootstrap-select>.dropdown-toggle.bs-placeholder.btn-light {
+    border-radius: 3em;
+    width: 80%;
+    height: 4em;
+    background-color: lightgray!important;
+    border-color: none!important;
+    opacity: 0.5;
+    color: black!important;
+}
+
+.filter-option-inner-inner {
+    text-transform: none;
+}
+
+.navbar {
+    padding: 0.7rem 1rem!important;
+}
+
+nav.navbar {
+    width: 100%;
+    background: white!important;
+    position: fixed;
+    z-index: 99999999;
+}
+
+.navbar-brand {
+    background: #191970;
+    font-family: 'Alfa Slab One', cursive;
+    height: 80%;
+    padding: 1%;
+}
+
+.navbar-brand a {
+    transition: 200ms;
+}
+
+nav.navbar a:hover {
+    background-color: #5CC8D7FF;
+    color: white!important;
+    transition: 200ms;
+}
+
+.navbar {
+    box-shadow: -1px 1px 3px 1px rgba(0, 0, 0, 0.1);
+}
+
+.btn-light {
+    background-color: white!important;
+    color: grey!important;
+}
+
+.navModal {
+    width: 20%;
+    text-align: center;
+    position: fixed;
+    top: 11%; left: 70%;
+    z-index: 999999999999999;
+}
+
+.navModal ul {
+    box-shadow: -1px 1px 6px 1px rgba(0, 0, 0, 0.2); 
+    background: white;
+    padding: 9%;
+}
+
+.navModal p {
+    margin: 0%;
+}
+
+.navModal h5 {
+    margin: 0%;
+}
+
+form .btn {
+    margin-left: auto;
+    margin-right: auto; 
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.navuser {
+    cursor: pointer;
+    padding: 5%;
+    transition: 200ms;
+}
+
+.navuser:hover {
+    background: #5CC8D7FF;
+    color: white;
+    transition: 200ms;
+    border-radius: 3em;
+}
+
+.imgNav {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.imgNavModal {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+}
+
+.logoutBtn {
+    color: black!important;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 4%!important;
+    width: 90%;
+    text-transform: none;
+}
+
+.logoutBtn:hover {
+    color: #5CC8D7FF!important;
+}
+
+.logoutBtn i {
+    font-size: 1.2em;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#navModalNone {
+    display: none;
+}
+
+.btnSpace {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.blockuserhome {
+    background: #191970;
+    overflow: scroll;
+    box-shadow: -1px 1px 4px 2px rgba(0, 0, 0, 0.2);
+}
+
+.blockuserhome::-webkit-scrollbar {
+    display: none;
+}
+
+.userHome {
+    border: solid 1px #F8F5F0;
+    background: #F8F5F0;
+    border-radius: 2em;
+    padding: 1%;
+    cursor: pointer;
+    box-shadow: -1px 2px 4px 1px rgba(0, 0, 0, 0.1); 
+    transition: 200ms;
+}
+
+.userHome:hover {
+    box-shadow: none;
+    transition: 200ms;
+    transform: scale(1.04);
+}
+
+a:hover {
+    text-decoration: none!important;
+}
+
+.cardgrp {
+    background-color: #191970!important;
+    box-shadow: -1px 2px 4px 1px rgba(0, 0, 0, 0.1);
+    transition: 200ms; 
+    width: 50%;
+}
+
+.cardgrp a {
+    color: white!important;
+}
+
+.cardgrp .card-img {
+    filter: contrast(50%);
+    opacity: 0.7;
+    transition: 200ms;
+}
+
+.grptitles {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 3em;
+    padding: 2%;
+    font-size: 1em;
+    z-index: 1;
+    transition: 200ms;
+}
+
+.cardgrp:hover {
+    transform: scale(1.02);
+    box-shadow: none;
+    transition: 200ms;
+    cursor: pointer;
+}
+
+.cardgrp:hover .card-img {
+    filter: contrast(100%);
+    opacity: 1;
+    transition: 200ms;
+}
+
+.cardgrp:hover .grptitles {
+    background-color: transparent;
+    font-size: 1.3em;
+    transition: 200ms;
+}
+
+.cardgrp:hover .eventcardh {
+    animation-name: pulse;
+    animation-duration: 800ms;
+}
+
+.cardgrp:hover a:hover {
+    color: white!important;
+}
+
+.userHome p {
+    margin-bottom: auto;
+    margin-top: auto;
+}
+
+.userHome img {
+    border-radius: 50%;
+}
+
+.eventhome {
+    text-align: center;
+    border: solid 1px lightgray;
+    background: lightgray;
+    border-radius: 2em;
+    padding: 2%;
+    cursor: pointer;
+    box-shadow: -1px 2px 4px 1px rgba(0, 0, 0, 0.1); 
+}
+
+.ifhome {
+    color: #d9534f;
+    padding: 3%;
+    margin: auto;
+}
+
+.usertitlehome {
+    margin: auto;
+    padding: 3%;
+}
+
+@keyframes pulse {
+    from {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+  
+    50% {
+      -webkit-transform: scale3d(1.05, 1.05, 1.05);
+      transform: scale3d(1.05, 1.05, 1.05);
+    }
+  
+    to {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+  }
+  
+  .pulse {
+    animation-name: pulse;
+  }
